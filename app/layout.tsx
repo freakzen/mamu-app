@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Solve for Belgavi - Civic Issue Reporting',
+  description: 'Report and track civic issues in Belgavi. Connect with experts and your community to solve local problems together.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
       },
     ],
     apple: '/apple-icon.png',
+  },
+  other: {
+    'theme-color': '#FF9933',
   },
 }
 
