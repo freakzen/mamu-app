@@ -167,30 +167,42 @@ export default function IssuesPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="line-clamp-2 mb-4">{issue.description}</CardDescription>
+  {issue.image_url && (
+    <div className="mb-4 overflow-hidden rounded-lg">
+      <img
+        src={issue.image_url}
+        alt={issue.title}
+        className="w-full h-48 object-cover"
+      />
+    </div>
+  )}
 
-                    {issue.address && (
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                        <MapPin className="w-4 h-4" />
-                        <span>{issue.address}</span>
-                      </div>
-                    )}
+  <CardDescription className="line-clamp-2 mb-4">
+    {issue.description}
+  </CardDescription>
 
-                    <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-2">
-                        <Heart className="w-4 h-4" />
-                        <span>{issue.upvote_count}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MessageSquare className="w-4 h-4" />
-                        <span>{issue.comment_count}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4" />
-                        <span>{issue.view_count}</span>
-                      </div>
-                    </div>
-                  </CardContent>
+  {issue.address && (
+    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+      <MapPin className="w-4 h-4" />
+      <span>{issue.address}</span>
+    </div>
+  )}
+
+  <div className="flex items-center gap-6 text-sm text-muted-foreground">
+    <div className="flex items-center gap-2">
+      <Heart className="w-4 h-4" />
+      <span>{issue.upvote_count}</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <MessageSquare className="w-4 h-4" />
+      <span>{issue.comment_count}</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <TrendingUp className="w-4 h-4" />
+      <span>{issue.view_count}</span>
+    </div>
+  </div>
+</CardContent>
                 </Card>
               </Link>
             ))}

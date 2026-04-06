@@ -61,7 +61,14 @@ export async function updateIssue(id: string, updates: Partial<Issue>) {
 export async function getIssueComments(issueId: string) {
   const { data, error } = await supabase
     .from('comments')
-    .select('*, users:user_id(id, full_name, avatar_url, role)')
+    .select(`
+      *,
+      users:user_id(
+        id,
+        full_name,
+        role
+      )
+    `)
     .eq('issue_id', issueId)
     .order('created_at', { ascending: true });
 
@@ -84,9 +91,7 @@ export async function createComment(comment: Partial<Comment>) {
 export async function likeIssue(userId: string, issueId: string) {
   const { error } = await supabase
     .from('likes')
-    .insert([{ user_id: userId, issue_id: issueId }])
-    .select()
-    .single();
+    .insert([{ user_id: userId, issue_id: issueId }]);
 
   if (error && error.code !== 'PGRST116') throw error;
 }
@@ -107,9 +112,8 @@ export async function hasUserLikedIssue(userId: string, issueId: string) {
     .select('id')
     .eq('user_id', userId)
     .eq('issue_id', issueId)
-    .single();
+    .maybeSingle();
 
-  if (error && error.code === 'PGRST116') return false;
   if (error) throw error;
   return !!data;
 }
@@ -140,7 +144,8 @@ export async function updateUserProfile(userId: string, updates: Partial<User>) 
 
 export async function awardLoyaltyPoints(userId: string, points: number) {
   const user = await getUserProfile(userId);
+
   return updateUserProfile(userId, {
-    loyalty_points: user.loyalty_points + points,
+    loyalty_points: (user.loyalty_points || 0) + points,
   });
 }

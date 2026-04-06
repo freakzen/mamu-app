@@ -20,62 +20,63 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+  e.preventDefault();
+  setError('');
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+  if (password !== confirmPassword) {
+    setError('Passwords do not match');
+    return;
+  }
+
+  if (password.length < 6) {
+    setError('Password must be at least 6 characters');
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (signUpError) {
+      setError(signUpError.message);
       return;
     }
 
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+    const user = data.user;
+
+    if (!user) {
+      setError('User not created (check email confirmation settings)');
       return;
     }
 
-    setLoading(true);
-
-    try {
-      const { data: authData, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
+    // 🔥 Insert profile (important)
+    const { error: profileError } = await supabase
+      .from('users')
+      .insert({
+        id: user.id,
+        email: user.email,
+        full_name: fullName,
+        role: 'citizen',
       });
 
-      if (signUpError) {
-        setError(signUpError.message);
-        return;
-      }
-
-      if (!authData.user) {
-        setError('User not created');
-        return;
-      }
-
-      // Create user profile
-      const { error: profileError } = await supabase
-        .from('users')
-        .insert([
-          {
-            id: authData.user.id,
-            email,
-            full_name: fullName,
-            role: 'citizen',
-          },
-        ]);
-
-      if (profileError) {
-        setError('Failed to create profile');
-        return;
-      }
-
-      router.push('/auth/verify-email');
-    } catch (err) {
-      setError('An unexpected error occurred');
-    } finally {
-      setLoading(false);
+    if (profileError) {
+      console.error('PROFILE ERROR:', profileError);
+      setError(profileError.message);
+      return;
     }
-  };
 
+    router.push('/');
+  } catch (err) {
+    console.error(err);
+    setError('Something went wrong');
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 flex items-center justify-center px-4">
       <div className="w-full max-w-md">

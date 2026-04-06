@@ -30,20 +30,16 @@ export type Issue = {
   user_id: string;
   title: string;
   description: string;
-  category: 'pothole' | 'streetlight' | 'water' | 'garbage' | 'pollution' | 'traffic' | 'other';
-  status: 'open' | 'in_progress' | 'resolved' | 'rejected';
+  category: string;
+  status: string;
+  address: string | null;
   latitude: number | null;
   longitude: number | null;
-  address: string | null;
-  image_urls: string[];
+  image_url: string | null;
   upvote_count: number;
   comment_count: number;
   view_count: number;
-  assigned_expert_id: string | null;
-  priority: number;
   created_at: string;
-  updated_at: string;
-  resolved_at: string | null;
 };
 
 export type Comment = {
