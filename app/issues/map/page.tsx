@@ -1,9 +1,10 @@
 'use client';
+export const dynamic = 'force-dynamic';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import dynamic from "next/dynamic";
+import nextDynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -11,11 +12,10 @@ import { getIssues } from '@/lib/api';
 import type { Issue } from '@/lib/supabase';
 import { MapPin, List } from 'lucide-react';
 
-const IssuesMap = dynamic(
-  () => import("@/components/issues-map").then(m => m.IssuesMap),
+const IssuesMap = nextDynamic(
+  () => import('@/components/issues-map').then(m => m.IssuesMap),
   { ssr: false }
 );
-
 const categoryColors: Record<string, string> = {
   pothole: 'bg-red-100 text-red-800',
   streetlight: 'bg-yellow-100 text-yellow-800',
@@ -135,7 +135,7 @@ export default function IssuesMapPage() {
                               : 'outline'
                         }
                       >
-                        {selectedIssue.status.replace('_', ' ')}
+                        {String(selectedIssue.status).replace('_', ' ')}
                       </Badge>
                     </div>
 
