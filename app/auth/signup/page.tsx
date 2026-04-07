@@ -168,9 +168,23 @@ export default function SignupPage() {
 
             <div className="mt-4 text-xs text-muted-foreground text-center">
               By signing up, you agree to our{' '}
-              <Link href="/terms" className="text-primary hover:underline">Terms</Link>
+              <a 
+  href="https://policies.google.com/privacy" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-primary hover:underline"
+>
+  Terms
+</a>
               {' '}and{' '}
-              <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
+             <a 
+  href="https://policies.google.com/privacy" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-primary hover:underline"
+>
+  Privacy Policy
+</a>
             </div>
           </CardContent>
         </Card>
