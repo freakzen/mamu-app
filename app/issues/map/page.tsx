@@ -3,13 +3,18 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import dynamic from "next/dynamic";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { IssuesMap } from '@/components/issues-map';
 import { getIssues } from '@/lib/api';
 import type { Issue } from '@/lib/supabase';
 import { MapPin, List } from 'lucide-react';
+
+const IssuesMap = dynamic(
+  () => import("@/components/issues-map").then(m => m.IssuesMap),
+  { ssr: false }
+);
 
 const categoryColors: Record<string, string> = {
   pothole: 'bg-red-100 text-red-800',
