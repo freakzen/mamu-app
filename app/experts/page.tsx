@@ -40,9 +40,13 @@ export default function ExpertsPage() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur">
         <div className="container flex h-16 max-w-7xl items-center justify-between mx-auto px-4">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-              S
-            </div>
+            <div className="w-12 h-12 rounded-lg overflow-hidden mx-auto mb-4">
+  <img
+    src="/grid-log.png"
+    alt="GRID Logo"
+    className="w-full h-full object-contain"
+  />
+</div>
             <span className="font-semibold text-lg hidden sm:inline">Solve for Belgavi</span>
           </Link>
           <nav className="flex items-center gap-4">

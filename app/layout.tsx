@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Solve for Belagavi - Civic Issue Reporting',
   description: 'Report and track civic issues in Belagavi. Connect with experts and your community to solve local problems together.',
-  generator: 'v0.app',
+  generator: 'Zaid Chinchali',
   icons: {
     icon: [
       {

@@ -45,9 +45,13 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="w-12 h-12 rounded-lg bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-4 font-bold text-lg">
-            S
-          </div>
+          <div className="w-12 h-12 rounded-lg overflow-hidden mx-auto mb-4">
+  <img
+    src="/grid-log.png"
+    alt="GRID Logo"
+    className="w-full h-full object-contain"
+  />
+</div>
           <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
           <p className="text-muted-foreground">Sign in to continue solving Belgavi's issues</p>
         </div>
